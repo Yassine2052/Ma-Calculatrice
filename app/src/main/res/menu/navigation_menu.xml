@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <group android:menuCategory="container">
+        <item
+            android:id="@+id/standard"
+            android:title="Standard"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/scientific"
+            android:title="Scientific"/>
+    </group>
+
+    <group android:menuCategory="container">
+        <item
+            android:id="@+id/currency"
+            android:title="Currency" />
+
+        <item
+            android:id="@+id/volume"
+            android:title="Volume"/>
+
+        <item
+            android:id="@+id/length"
+            android:title="Length"/>
+
+        <item
+            android:id="@+id/weight"
+            android:title="Weight and Mass"/>
+
+        <item
+            android:id="@+id/temperature"
+            android:title="Temperature"/>
+    </group>
+</menu>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/main_bg"
+    android:gravity="bottom"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculator"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="25sp"
+        android:textColor="@color/other_operator_color"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logo"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="40sp"
+        android:textColor="@color/white" />
+</LinearLayout>

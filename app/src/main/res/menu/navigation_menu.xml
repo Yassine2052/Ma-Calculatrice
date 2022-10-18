@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:menuCategory="container">
-        <item
-            android:id="@+id/standard"
-            android:title="Standard"
-            android:checked="true"/>
+    <item
+        android:id="@+id/standard"
+        android:title="@string/calculator"
+        android:checked="true"
+        android:icon="@mipmap/calculator"/>
 
-        <item
-            android:id="@+id/scientific"
-            android:title="Scientific"/>
-    </group>
+    <item
+        android:id="@+id/currency"
+        android:title="@string/currency"
+        android:icon="@mipmap/currency"/>
 
-    <group android:menuCategory="container">
-        <item
-            android:id="@+id/currency"
-            android:title="Currency" />
+    <item
+        android:id="@+id/volume"
+        android:title="@string/volume"
+        android:icon="@mipmap/volume"/>
 
-        <item
-            android:id="@+id/volume"
-            android:title="Volume"/>
+    <item
+        android:id="@+id/length"
+        android:title="@string/length"
+        android:icon="@mipmap/length"/>
 
-        <item
-            android:id="@+id/length"
-            android:title="Length"/>
+    <item
+        android:id="@+id/weight_mass"
+        android:title="@string/weight_mass"
+        android:icon="@mipmap/weight"/>
 
-        <item
-            android:id="@+id/weight"
-            android:title="Weight and Mass"/>
-
-        <item
-            android:id="@+id/temperature"
-            android:title="Temperature"/>
-    </group>
+    <item
+        android:id="@+id/temperature"
+        android:title="@string/temperature"
+        android:icon="@mipmap/temperature"/>
 </menu>

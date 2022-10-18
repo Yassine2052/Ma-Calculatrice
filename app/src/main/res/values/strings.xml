@@ -1,4 +1,5 @@
 <resources>
+    <string name="logo">My App</string>
     <string name="app_name">Calculator</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
@@ -27,4 +28,10 @@
     <string name="division">÷</string>
     <string name="equality">=</string>
     <string name="todo">TODO</string>
+    <string name="calculator">Calculator</string>
+    <string name="currency">Currency</string>
+    <string name="volume">Volume</string>
+    <string name="length">Length</string>
+    <string name="weight_mass">Weight and Mass</string>
+    <string name="temperature">Temperature</string>
 </resources>

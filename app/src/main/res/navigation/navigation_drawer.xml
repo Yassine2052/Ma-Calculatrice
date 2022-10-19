@@ -10,4 +10,17 @@
         android:label="@string/calculator"
         tools:layout="@layout/fragment_calculator"
         android:name="com.example.calculator.ui.calculator.CalculatorFragment" />
+
+    <fragment
+        android:id="@+id/nav_currency"
+        android:label="@string/currency"
+        tools:layout="@layout/fragment_currency"
+        android:name="com.example.calculator.ui.currency.CurrencyFragment"/>
+
+    <fragment
+        android:id="@+id/nav_temperature"
+        android:label="@string/temperature"
+        tools:layout="@layout/fragment_temperature"
+        android:name="com.example.calculator.ui.temperature.TemperatureFragment"/>
+
 </navigation>

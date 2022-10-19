@@ -5,7 +5,7 @@
         android:drawable="@color/transparent"/>
 
     <item
-        android:drawable="@color/buttons_container_bg"
+        android:drawable="@color/buttons_container_bg_50"
         android:state_checkable="true"
         android:state_checked="true"/>
 </selector>

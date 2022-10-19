@@ -12,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.calculator.ui.calculator.CalculatorFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -19,7 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-    public NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +39,13 @@ public class MainActivity extends AppCompatActivity {
         // to make the Navigation drawer icon always appear on the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
 
-        loadFragment(new CalculatorFragment());
-        navigationView.setCheckedItem(R.id.standard);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_container);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                switch (id){
-                    default:{
-                        loadFragment(new CalculatorFragment());
-                    }
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                return true;
-            }
-        });
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override
@@ -67,14 +55,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void loadFragment(Fragment fragment){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.add(R.id.container, fragment);
-        ft.commit();
     }
 
     @Override

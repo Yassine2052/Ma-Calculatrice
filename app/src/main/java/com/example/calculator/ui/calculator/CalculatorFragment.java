@@ -42,12 +42,14 @@ public class CalculatorFragment extends Fragment {
         );
 
         buttons.forEach(button -> {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    numberButtonClickHandler(button);
-                }
-            });
+            if(button != null){
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        numberButtonClickHandler(button);
+                    }
+                });
+            }
         });
     }
 
@@ -62,12 +64,14 @@ public class CalculatorFragment extends Fragment {
         );
 
         buttons.forEach(button -> {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    operatorButtonClickHandler(button);
-                }
-            });
+            if(button != null){
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        operatorButtonClickHandler(button);
+                    }
+                });
+            }
         });
     }
 
@@ -83,31 +87,41 @@ public class CalculatorFragment extends Fragment {
         );
 
         buttons.forEach(button -> {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    otherOperatorsButtonClickHandler(button);
-                }
-            });
+            if(button != null){
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        otherOperatorsButtonClickHandler(button);
+                    }
+                });
+            }
         });
     }
 
     private void equalButtonClickListener(){
-        getView().findViewById(R.id.equal).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                equalButtonClickHandler();
-            }
-        });
+        try {
+            getView().findViewById(R.id.equal).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    equalButtonClickHandler();
+                }
+            });
+        }catch (Exception exception){
+
+        }
     }
 
     private void eraseButtonClickListener(){
-        getView().findViewById(R.id.erase).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                eraseButtonClickHandler();
-            }
-        });
+        try {
+            getView().findViewById(R.id.erase).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    eraseButtonClickHandler();
+                }
+            });
+        }catch (Exception exception){
+
+        }
     }
 
     private void clearButtonsClickListener(){
@@ -119,12 +133,14 @@ public class CalculatorFragment extends Fragment {
         );
 
         buttons.forEach(button -> {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clearButtonsCLickHandler(button);
-                }
-            });
+            if(button != null){
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clearButtonsCLickHandler(button);
+                    }
+                });
+            }
         });
     }
 
@@ -290,7 +306,6 @@ public class CalculatorFragment extends Fragment {
     }
 
     private void eraseButtonClickHandler(){
-        Log.i("ersing", "You are erasing");
         try {
             if(!IsEmptyOrNull(number2)){
                 number2 = number2.substring(0, number2.length() - 1);

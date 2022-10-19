@@ -29,9 +29,24 @@
     <string name="equality">=</string>
     <string name="todo">TODO</string>
     <string name="calculator">Calculator</string>
+    <string name="conversion">Conversion</string>
     <string name="currency">Currency</string>
     <string name="volume">Volume</string>
     <string name="length">Length</string>
     <string name="weight_mass">Weight and Mass</string>
     <string name="temperature">Temperature</string>
+
+    <string-array name="currencies_array">
+        <item>Dirham - Morocco</item>
+        <item>Dollar $ - US</item>
+        <item>Euro € - Europe</item>
+        <item>Pound £ - UK</item>
+        <item>Riyal - Saudi Arabia</item>
+    </string-array>
+
+    <string-array name="temperature_units">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
 </resources>

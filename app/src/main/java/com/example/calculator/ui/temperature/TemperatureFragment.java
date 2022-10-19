@@ -1,4 +1,4 @@
-package com.example.calculator.ui.currency;
+package com.example.calculator.ui.temperature;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,50 +19,14 @@ import com.example.calculator.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
-public class CurrencyFragment extends Fragment
-{
-    private String selectedItemFrom = "Dirham - Morocco", selectedItemTo = "Dirham - Morocco";
+public class TemperatureFragment extends Fragment {
+    private String selectedItemFrom = "Celsius", selectedItemTo = "Celsius";
     private String fromValue = null, toValue = null;
 
-    private HashMap<String, HashMap<String, Double>> currencies = new HashMap(){{
-        put("Dirham - Morocco", new HashMap<String, Double>(){{
-            put("Dirham - Morocco", 1.00);
-            put("Dollar $ - US", 0.091);
-            put("Euro € - Europe", 0.09);
-            put("Pound £ - UK", 0.08);
-            put("Riyal - Saudi Arabia", 0.34);
-        }});
-        put("Dollar $ - US", new HashMap<String, Double>(){{
-            put("Dirham - Morocco", 10.80);
-            put("Dollar $ - US", 1.00);
-            put("Euro € - Europe", 0.99);
-            put("Pound £ - UK", 0.87);
-            put("Riyal - Saudi Arabia", 3.70);
-        }});
-        put("Euro € - Europe", new HashMap<String, Double>(){{
-            put("Dirham - Morocco", 10.95);
-            put("Dollar $ - US", 1.01);
-            put("Euro € - Europe", 1.00);
-            put("Pound £ - UK", 0.88);
-            put("Riyal - Saudi Arabia", 3.75);
-        }});
-        put("Pound £ - UK", new HashMap<String, Double>(){{
-            put("Dirham - Morocco", 12.40);
-            put("Dollar $ - US", 1.13);
-            put("Euro € - Europe", 1.14);
-            put("Pound £ - UK", 1.00);
-            put("Riyal - Saudi Arabia", 4.24);
-        }});
-        put("Riyal - Saudi Arabia", new HashMap<String, Double>(){{
-            put("Dirham - Morocco", 2.92);
-            put("Dollar $ - US", 0.26);
-            put("Euro € - Europe", 0.27);
-            put("Pound £ - UK", 0.23);
-            put("Riyal - Saudi Arabia", 1.00);
-        }});
-    }};
+    final private ArrayList<String> units = new ArrayList<>(
+            Arrays.asList("Celsius", "Fahrenheit", "Kelvin")
+    );
 
     private void Reset(){
         selectedItemFrom = "Dirham - Morocco";
@@ -83,40 +46,82 @@ public class CurrencyFragment extends Fragment
             TextView fromTextView = (TextView) getView().findViewById(R.id.currency_from_value);
 
             fromTextView.setText(""+(fromValue != null ? fromValue : 0.00));
-
-        }catch (Exception exception){
+        }catch (Exception NullPointerException){
 
         }
     }
 
-    private void Convert(){
-        if(currencies.containsKey(selectedItemFrom)){
-            HashMap<String, Double> currentCurrency = currencies.get(selectedItemFrom);
+    private boolean Convert(){
+        if(units.contains(selectedItemFrom) && units.contains(selectedItemTo)) {
+            try {
+                int toIndex = units.indexOf(selectedItemTo);
+                int fromIndex = units.indexOf(selectedItemFrom);
 
-            if(currentCurrency.containsKey(selectedItemTo)){
-                Double rate = currentCurrency.get(selectedItemTo);
-
-                try {
-                    toValue = Double.toString(
-                            Double.parseDouble(fromValue != null ? fromValue : "0.00") * rate
-                    );
-
-
-                }catch (Exception exception){
-
-                }finally {
-                    Display();
+                if (toIndex == fromIndex) {
+                    toValue = fromValue;
+                    return true;
                 }
 
+                Double value = Double.parseDouble(fromValue);
+
+                if (selectedItemFrom.equals(units.get(0))) {
+
+                    if (selectedItemTo.equals(units.get(1))) {
+                        toValue = Double.toString(
+                                32 + value * 9 / 5
+                        );
+
+                        return true;
+                    }
+
+                    toValue = Double.toString(
+                            273.15 + value
+                    );
+
+                    return true;
+                }
+
+                if (selectedItemFrom.equals(units.get(1))) {
+
+                    if (selectedItemTo.equals(units.get(0))) {
+                        toValue = Double.toString(
+                                (value - 32) * 5 / 9
+                        );
+
+                        return true;
+                    }
+
+                    toValue = Double.toString(
+                            273.15 + (value - 32) * 5 / 9
+                    );
+
+                    return true;
+                }
+
+                if (selectedItemTo.equals(units.get(0))) {
+                    toValue = Double.toString(
+                            value - 273.15
+                    );
+
+                    return true;
+                }
+
+                toValue = Double.toString(
+                        32 + (value - 273.15) * 9 / 5
+                );
+
+                return true;
+
+
+            } catch (Exception exception) {
+                Log.e("Error", exception.toString());
+                return false;
+            } finally {
+                Display();
             }
         }
-    }
 
-    private void negativeButtonClickHandler(){
-        if(fromValue != null && !fromValue.isEmpty() && fromValue.charAt(0) != '-'){
-            fromValue = "-" + fromValue;
-            Convert();
-        }
+        return false;
     }
 
     private void eraseButtonClickHandler(){
@@ -157,16 +162,6 @@ public class CurrencyFragment extends Fragment
         }
     }
 
-    private void negativeButtonClickListener(){
-        try {
-            getView().findViewById(R.id.plusMinus).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) { negativeButtonClickHandler(); }
-            });
-        }catch (Exception NullPointerException){
-
-        }
-    }
 
     private void eraseButtonClickListener(){
         try {
@@ -176,7 +171,7 @@ public class CurrencyFragment extends Fragment
                     eraseButtonClickHandler();
                 }
             });
-        }catch (Exception NullPointerException){
+        }catch (Exception exception){
 
         }
     }
@@ -224,33 +219,33 @@ public class CurrencyFragment extends Fragment
     }
 
     private void SpinnerOnSelectListener(Spinner spinner){
-          spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                  String selectedItem = adapterView.getItemAtPosition(i).toString();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
 
-                  if (currencies.containsKey(selectedItem)) {
-                      if (spinner.getId() == R.id.currency_from) {
-                          selectedItemFrom = selectedItem;
-                      }else{
-                          selectedItemTo = selectedItem;
-                      }
+                if (units.contains(selectedItem)) {
+                    if (spinner.getId() == R.id.currency_from) {
+                        selectedItemFrom = selectedItem;
+                    }else{
+                        selectedItemTo = selectedItem;
+                    }
 
-                      Convert();
-                  }
-              }
+                    Convert();
+                }
+            }
 
-              @Override
-              public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-              }
-          });
+            }
+        });
     }
 
     private void SpinnerAdapterSetter(Spinner ...spinners){
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
                 getContext(),
-                R.array.currencies_array,
+                R.array.temperature_units,
                 R.layout.spinner_item
         );
 
@@ -270,7 +265,7 @@ public class CurrencyFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.fragment_currency, container, false);
+        return inflater.inflate(R.layout.fragment_temperature, container, false);
     }
 
     @Override
@@ -280,7 +275,6 @@ public class CurrencyFragment extends Fragment
         numbersButtonsListeners();
         eraseButtonClickListener();
         clearButtonClickListener();
-        negativeButtonClickListener();
 
         Spinner spinnerFrom = (Spinner) getView().findViewById(R.id.currency_from);
 

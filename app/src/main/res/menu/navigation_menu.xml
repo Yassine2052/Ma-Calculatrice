@@ -3,33 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/standard"
+        android:id="@+id/nav_calculator"
         android:title="@string/calculator"
         android:checked="true"
-        android:icon="@mipmap/calculator"/>
+        android:icon="@mipmap/calculator"
+        android:iconTint="@color/white"
+        android:checkable="true"/>
 
     <item
-        android:id="@+id/currency"
+        android:id="@+id/nav_currency"
         android:title="@string/currency"
-        android:icon="@mipmap/currency"/>
+        android:icon="@mipmap/currency"
+        android:iconTint="@color/white"
+        android:checkable="true"/>
 
     <item
-        android:id="@+id/volume"
-        android:title="@string/volume"
-        android:icon="@mipmap/volume"/>
-
-    <item
-        android:id="@+id/length"
-        android:title="@string/length"
-        android:icon="@mipmap/length"/>
-
-    <item
-        android:id="@+id/weight_mass"
-        android:title="@string/weight_mass"
-        android:icon="@mipmap/weight"/>
-
-    <item
-        android:id="@+id/temperature"
+        android:id="@+id/nav_temperature"
         android:title="@string/temperature"
-        android:icon="@mipmap/temperature"/>
+        android:icon="@mipmap/temperature"
+        android:iconTint="@color/white"
+        android:checkable="true"/>
+
 </menu>

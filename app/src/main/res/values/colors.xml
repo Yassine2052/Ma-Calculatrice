@@ -14,6 +14,7 @@
     <color name="transparent">#00000000</color>
     <color name="main_bg">#22252D</color>
     <color name="buttons_container_bg">#2A2D37</color>
+    <color name="buttons_container_bg_50">#802A2D37</color>
     <color name="button_bg">#22252D</color>
     <color name="operator_color">#a05c60</color>
     <color name="other_operator_color">#1ab79d</color>

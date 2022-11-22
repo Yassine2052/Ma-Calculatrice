@@ -29,10 +29,18 @@ public class TemperatureFragment extends Fragment {
     );
 
     private void Reset(){
-        selectedItemFrom = "Dirham - Morocco";
-        selectedItemTo = "Dirham - Morocco";
+        selectedItemFrom = "Celsius";
+        selectedItemTo = "Celsius";
         fromValue = null;
         toValue = null;
+
+        Spinner spinnerFrom = (Spinner) getView().findViewById(R.id.currency_from);
+
+        Spinner spinnerTo = (Spinner) getView().findViewById(R.id.currency_to);
+
+        spinnerFrom.setSelection(0);
+
+        spinnerTo.setSelection(0);
 
         Convert();
     }
@@ -126,10 +134,8 @@ public class TemperatureFragment extends Fragment {
 
     private void eraseButtonClickHandler(){
         try {
-            String value = fromValue.length() > 1 ?
+            fromValue = fromValue.length() > 1 ?
                     fromValue.substring(0, fromValue.length() - 1) : null;
-
-            fromValue = value;
 
             Convert();
 
@@ -257,7 +263,28 @@ public class TemperatureFragment extends Fragment {
 
             SpinnerOnSelectListener(spinner);
         }
+    }
 
+    private void PlusMinusListener(){
+        Button button = (Button) getView().findViewById(R.id.plusMinus);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlusMinusClickHandler(button);
+            }
+        });
+    }
+
+    private void PlusMinusClickHandler(Button button){
+        if(fromValue != null){
+            try{
+                fromValue = "" + Double.parseDouble(fromValue) * - 1;
+                Convert();
+            }catch (Exception exception){
+
+            }
+        }
     }
 
     @Nullable
@@ -281,5 +308,7 @@ public class TemperatureFragment extends Fragment {
         Spinner spinnerTo = (Spinner) getView().findViewById(R.id.currency_to);
 
         SpinnerAdapterSetter(spinnerFrom, spinnerTo);
+
+        PlusMinusListener();
     }
 }

@@ -1,14 +1,25 @@
 package com.example.calculator.ui.calculator;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,13 +27,36 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.calculator.R;
+import com.example.calculator.adpaters.HistoryAdapter;
+import com.example.calculator.db.DBHandler;
+import com.example.calculator.db.Operation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CalculatorFragment extends Fragment {
-    private String number1 = null, number2 = null, result = null, operation = null;
-    private String operator = null;
+    private String number1 = null, number2 = null, result = null, operator = null;
+
+    private boolean historyShown = true;
+
+    private void containerClickListener(){
+        LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.calculator_container);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(historyShown){
+                    toggleHistory();
+                };
+            }
+        });
+    }
+
+    private void historyButtonListener(){
+        ImageButton button = (ImageButton) getView().findViewById(R.id.history_button);
+
+        button.setOnClickListener(view -> toggleHistory());
+    }
 
     private void numbersButtonsListeners(){
         ArrayList<Button> buttons = new ArrayList<Button>(
@@ -103,7 +137,7 @@ public class CalculatorFragment extends Fragment {
             getView().findViewById(R.id.equal).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    equalButtonClickHandler();
+                    equalButtonClickHandler(true);
                 }
             });
         }catch (Exception exception){
@@ -184,7 +218,7 @@ public class CalculatorFragment extends Fragment {
                 operator = button.getText().toString();
 
                 if(result != null && !result.isEmpty()){
-                    equalButtonClickHandler();
+                    equalButtonClickHandler(false);
                 }
 
                 calculateResult();
@@ -286,14 +320,28 @@ public class CalculatorFragment extends Fragment {
         }
     }
 
-    private void equalButtonClickHandler(){
+    private void equalButtonClickHandler(boolean clicked){
         try {
             if(!IsEmptyOrNull(result)){
                 TextView resultTextView = (TextView) getView().findViewById(R.id.result);
+
                 TextView operationTextView = (TextView) getView().findViewById(R.id.operation);
 
                 operationTextView.setText(result+operator);
                 resultTextView.setText(result);
+
+                if(clicked){
+                    DBHandler db = new DBHandler(this.getContext());
+
+                    Operation operation = new Operation(-1, number1, number2, operator, result);
+
+                    long id = db.insertOperation(operation);
+
+                    if(id != -1){
+                        setHistoryData();
+                    }
+                }
+
 
                 number1 = result;
                 number2 = null;
@@ -394,9 +442,100 @@ public class CalculatorFragment extends Fragment {
         number2 = null;
         result = null;
         operator = null;
-        operation = null;
 
         calculateResult();
+    }
+
+    private void toggleHistory(){
+        try{
+            FrameLayout frameLayout = (FrameLayout) getView().findViewById(R.id.history_container);
+
+            float value = this.getActivity().getResources().getDisplayMetrics().heightPixels / 2;
+
+            AnimatorSet set = new AnimatorSet();
+
+            // Using property animation
+            ObjectAnimator animation = ObjectAnimator.ofFloat(
+                    frameLayout,
+                    "translationY",
+                    historyShown ? value - 160 : value * 2,
+                    historyShown ? value * 2 : value - 160
+            );
+
+            animation.setDuration(500);
+
+            set.play(animation);
+
+            set.start();
+
+            historyShown = !historyShown;
+
+        }catch (Exception exception){
+
+        }
+
+    }
+
+    private void initHistory(){
+        FrameLayout frameLayout = (FrameLayout) getView().findViewById(R.id.history_container);
+
+        float height = this.getActivity().getResources().getDisplayMetrics().heightPixels / 2;
+
+        ViewGroup.LayoutParams layoutParams = frameLayout.getLayoutParams();
+
+        layoutParams.height = (int) height;
+
+        frameLayout.setLayoutParams(layoutParams);
+
+        setHistoryData();
+    }
+
+    private void itemSelectedHandler(HistoryAdapter historyAdapter, int index){
+        try{
+            Operation operation = historyAdapter.getItem(index);
+
+            if(operation != null){
+                TextView operationTextView = (TextView) getView().findViewById(R.id.operation);
+
+                number1 = operation.getNumber1();
+                number2 = operation.getNumber2();
+                operator = operation.getOperator();
+                result = operation.getResult();
+
+                Double number2Double = Double.parseDouble(number2);
+
+                if(number2Double < 0 && operator.equals("+")){
+                    operator = "-";
+
+                    number2 = String.valueOf(Math.abs(number2Double));
+                }
+
+                operationTextView.setText(number1 + " " + operator + " " + number2);
+
+                calculateResult();
+            }
+
+        }catch (Exception exception){
+        }
+
+    }
+
+    public void setHistoryData(){
+        try {
+            DBHandler db = new DBHandler(this.getContext());
+
+            ArrayList<Operation> operations = db.getOperations();
+
+            ListView listView = (ListView) getView().findViewById(R.id.history);
+
+            HistoryAdapter historyAdapter = new HistoryAdapter(this.getContext(), operations, this);
+
+            listView.setAdapter(historyAdapter);
+
+            listView.setOnItemClickListener((adapterView, view, index, l) -> itemSelectedHandler(historyAdapter, index));
+
+        }catch (Exception exception){
+        }
     }
 
     @Nullable
@@ -411,11 +550,17 @@ public class CalculatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        containerClickListener();
+        historyButtonListener();
         numbersButtonsListeners();
         operatorsButtonsListeners();
         otherOperatorsButtonsListeners();
         clearButtonsClickListener();
         equalButtonClickListener();
         eraseButtonClickListener();
+
+        initHistory();
+
+        toggleHistory();
     }
 }

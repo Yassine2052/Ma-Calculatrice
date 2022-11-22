@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/calculator_fragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/length_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.calculator.CalculatorFragment">
+    tools:context=".ui.length.LengthFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,97 +16,93 @@
         android:background="@color/main_bg">
 
         <LinearLayout
-            android:id="@+id/calculator_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/main_bg"
-            android:clickable="true">
+            android:background="@color/main_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="25dp"
-                android:layout_weight="1"
-                android:gravity="bottom">
+                android:paddingBottom="25dp">
 
-                <ImageButton
-                    android:id="@+id/history_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/history"
-                    android:background="@color/transparent"
-                    app:tint="@color/white"
-                    android:layout_gravity="right"
-                    android:layout_marginBottom="15dp"/>
-
-                <TextView
-                    android:id="@+id/operation"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/montserrat_bold"/>
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
 
-                <TextView
-                    android:id="@+id/result"
+                    <TextView
+                        android:id="@+id/length_from_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
+                        android:textSize="50sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"/>
+
+                    <Spinner
+                        android:id="@+id/length_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:layout_gravity="left"
+                        android:backgroundTint="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_0"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white"
-                    android:textSize="50sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"/>
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/length_to_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_0"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
+                        android:textSize="50sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"/>
+
+                    <Spinner
+                        android:id="@+id/length_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_gravity="left"
+                        android:backgroundTint="@color/white"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:rowCount="6"
-                android:columnCount="4"
+                android:layout_weight="1"
+                android:columnCount="3"
+                android:rowCount="5"
                 android:paddingVertical="30dp"
                 android:paddingHorizontal="10dp"
                 android:layout_gravity="bottom"
-                android:layout_weight="3"
                 android:background="@drawable/grid_layout">
 
-                <Button
-                    android:id="@+id/percent"
-                    android:text="@string/percent"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_rowWeight="1"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_columnWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp" />
-
-                <Button
-                    android:id="@+id/ce"
-                    android:text="@string/ce"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
+                    android:layout_rowWeight="1"/>
 
                 <Button
                     android:id="@+id/c"
@@ -134,66 +130,6 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:src="@mipmap/delete"
                     app:cornerRadius="20dp" />
-
-                <Button
-                    android:id="@+id/onx"
-                    android:text="@string/inverse"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
-                    android:id="@+id/square"
-                    android:text="@string/square"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
-                    android:id="@+id/sqrt"
-                    android:text="@string/sqrt"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
-                    android:id="@+id/devide"
-                    android:text="@string/division"
-                    android:textColor="@color/operator_color"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
 
                 <Button
                     android:id="@+id/number7"
@@ -230,21 +166,6 @@
                     android:text="@string/nine"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
-                    android:id="@+id/multiply"
-                    android:text="@string/multiplication"
-                    android:textColor="@color/operator_color"
-                    android:textSize="25sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_bold"
                     android:layout_columnWeight="1"
@@ -301,21 +222,6 @@
                     app:cornerRadius="15dp"/>
 
                 <Button
-                    android:id="@+id/minus"
-                    android:text="@string/minus"
-                    android:textColor="@color/operator_color"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
                     android:id="@+id/number1"
                     android:text="@string/one"
                     android:textColor="@color/white"
@@ -360,35 +266,11 @@
                     android:backgroundTint="@color/button_bg"
                     app:cornerRadius="15dp"/>
 
-                <Button
-                    android:id="@+id/addition"
-                    android:text="@string/addition"
-                    android:textColor="@color/operator_color"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
-                <Button
-                    android:id="@+id/plusMinus"
-                    android:text="@string/negative"
-                    android:textColor="@color/other_operator_color"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
+                    android:layout_rowWeight="1"/>
 
                 <Button
                     android:id="@+id/number0"
@@ -421,40 +303,10 @@
                     android:backgroundTint="@color/button_bg"
                     app:cornerRadius="15dp"/>
 
-                <Button
-                    android:id="@+id/equal"
-                    android:text="@string/equality"
-                    android:textColor="@color/operator_color"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_gravity="fill"
-                    android:layout_margin="2.5dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:backgroundTint="@color/button_bg"
-                    app:cornerRadius="15dp"/>
-
             </GridLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/history_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/rounded"
-        android:paddingVertical="20dp">
-
-        <ListView
-            android:id="@+id/history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants" />
-
-    </FrameLayout>
 
 </FrameLayout>

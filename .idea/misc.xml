@@ -8,13 +8,19 @@
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/drawable/grid_layout.xml" value="0.207" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/drawable/rounded.xml" value="0.207" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/drawable/rounded_text_view.xml" value="0.142" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/activity_standard.xml" value="0.29075425790754256" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/drawer_header_layout.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragement_calculator.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragment_calculator.xml" value="0.1" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragment_currency.xml" value="0.1" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragment_date.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragment_length.xml" value="0.1" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/fragment_temperature.xml" value="0.1" />
-        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/history_header.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/history_row.xml" value="0.1" />
+        <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.176" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/layout/spinner_item.xml" value="0.25" />
         <entry key="..\:/Users/yassi/Desktop/S7/Android_Studio/app/src/main/res/menu/navigation_menu.xml" value="0.1" />
       </map>

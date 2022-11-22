@@ -35,6 +35,7 @@
     <string name="length">Length</string>
     <string name="weight_mass">Weight and Mass</string>
     <string name="temperature">Temperature</string>
+    <string name="date">Date Calculation</string>
 
     <string-array name="currencies_array">
         <item>Dirham - Morocco</item>
@@ -48,5 +49,19 @@
         <item>Celsius</item>
         <item>Fahrenheit</item>
         <item>Kelvin</item>
+    </string-array>
+
+    <string-array name="length_array">
+        <item>Kilometre</item>
+        <item>Meter</item>
+        <item>Centimeter</item>
+        <item>Millimetre</item>
+        <item>Micrometres</item>
+        <item>Nanometre</item>
+        <item>Mile</item>
+        <item>Yard</item>
+        <item>Foot</item>
+        <item>Inch</item>
+        <item>Nautical mile</item>
     </string-array>
 </resources>

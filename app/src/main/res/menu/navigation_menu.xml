@@ -24,4 +24,17 @@
         android:iconTint="@color/white"
         android:checkable="true"/>
 
+    <item
+        android:id="@+id/nav_length"
+        android:title="@string/length"
+        android:icon="@mipmap/length"
+        android:iconTint="@color/white"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/nav_date"
+        android:title="@string/date"
+        android:icon="@mipmap/calendar"
+        android:iconTint="@color/white"
+        android:checkable="true"/>
 </menu>

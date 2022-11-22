@@ -121,10 +121,8 @@ public class CurrencyFragment extends Fragment
 
     private void eraseButtonClickHandler(){
         try {
-            String value = fromValue.length() > 1 ?
+            fromValue = fromValue.length() > 1 ?
                     fromValue.substring(0, fromValue.length() - 1) : null;
-
-            fromValue = value;
 
             Convert();
 
@@ -223,7 +221,7 @@ public class CurrencyFragment extends Fragment
         });
     }
 
-    private void SpinnerOnSelectListener(Spinner spinner){
+    private void SpinnerOnSelectListener(@NonNull Spinner spinner){
           spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
               @Override
               public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -247,7 +245,7 @@ public class CurrencyFragment extends Fragment
           });
     }
 
-    private void SpinnerAdapterSetter(Spinner ...spinners){
+    private void SpinnerAdapterSetter(@NonNull Spinner ...spinners){
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.currencies_array,

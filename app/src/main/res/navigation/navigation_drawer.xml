@@ -23,4 +23,15 @@
         tools:layout="@layout/fragment_temperature"
         android:name="com.example.calculator.ui.temperature.TemperatureFragment"/>
 
+    <fragment
+        android:id="@+id/nav_length"
+        android:label="@string/length"
+        tools:layout="@layout/fragment_length"
+        android:name="com.example.calculator.ui.length.LengthFragment"/>
+
+    <fragment
+        android:id="@+id/nav_date"
+        android:label="@string/date"
+        tools:layout="@layout/fragment_date"
+        android:name="com.example.calculator.ui.date.DateFragment"/>
 </navigation>

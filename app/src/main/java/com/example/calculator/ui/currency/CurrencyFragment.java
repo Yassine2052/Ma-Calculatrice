@@ -157,10 +157,7 @@ public class CurrencyFragment extends Fragment
 
     private void negativeButtonClickListener(){
         try {
-            getView().findViewById(R.id.plusMinus).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) { negativeButtonClickHandler(); }
-            });
+            getView().findViewById(R.id.plusMinus).setOnClickListener(view -> negativeButtonClickHandler());
         }catch (Exception NullPointerException){
 
         }
@@ -168,12 +165,7 @@ public class CurrencyFragment extends Fragment
 
     private void eraseButtonClickListener(){
         try {
-            getView().findViewById(R.id.erase).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    eraseButtonClickHandler();
-                }
-            });
+            getView().findViewById(R.id.erase).setOnClickListener(view -> eraseButtonClickHandler());
         }catch (Exception NullPointerException){
 
         }
@@ -181,12 +173,7 @@ public class CurrencyFragment extends Fragment
 
     private void clearButtonClickListener(){
         try {
-            getView().findViewById(R.id.c).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Reset();
-                }
-            });
+            getView().findViewById(R.id.c).setOnClickListener(view -> Reset());
         }catch (Exception exception){
 
         }
@@ -211,12 +198,7 @@ public class CurrencyFragment extends Fragment
 
         buttons.forEach(button -> {
             if(button != null){
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        numberButtonClickHandler(button);
-                    }
-                });
+                button.setOnClickListener(view -> numberButtonClickHandler(button));
             }
         });
     }

@@ -42,13 +42,10 @@ public class CalculatorFragment extends Fragment {
     private void containerClickListener(){
         LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.calculator_container);
 
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(historyShown){
-                    toggleHistory();
-                };
-            }
+        linearLayout.setOnClickListener(view -> {
+            if(historyShown){
+                toggleHistory();
+            };
         });
     }
 
@@ -77,12 +74,7 @@ public class CalculatorFragment extends Fragment {
 
         buttons.forEach(button -> {
             if(button != null){
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        numberButtonClickHandler(button);
-                    }
-                });
+                button.setOnClickListener(view -> numberButtonClickHandler(button));
             }
         });
     }
@@ -99,12 +91,7 @@ public class CalculatorFragment extends Fragment {
 
         buttons.forEach(button -> {
             if(button != null){
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        operatorButtonClickHandler(button);
-                    }
-                });
+                button.setOnClickListener(view -> operatorButtonClickHandler(button));
             }
         });
     }
@@ -122,24 +109,14 @@ public class CalculatorFragment extends Fragment {
 
         buttons.forEach(button -> {
             if(button != null){
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        otherOperatorsButtonClickHandler(button);
-                    }
-                });
+                button.setOnClickListener(view -> otherOperatorsButtonClickHandler(button));
             }
         });
     }
 
     private void equalButtonClickListener(){
         try {
-            getView().findViewById(R.id.equal).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    equalButtonClickHandler(true);
-                }
-            });
+            getView().findViewById(R.id.equal).setOnClickListener(view -> equalButtonClickHandler(true));
         }catch (Exception exception){
 
         }
@@ -147,12 +124,7 @@ public class CalculatorFragment extends Fragment {
 
     private void eraseButtonClickListener(){
         try {
-            getView().findViewById(R.id.erase).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    eraseButtonClickHandler();
-                }
-            });
+            getView().findViewById(R.id.erase).setOnClickListener(view -> eraseButtonClickHandler());
         }catch (Exception exception){
 
         }
@@ -168,12 +140,7 @@ public class CalculatorFragment extends Fragment {
 
         buttons.forEach(button -> {
             if(button != null){
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        clearButtonsCLickHandler(button);
-                    }
-                });
+                button.setOnClickListener(view -> clearButtonsCLickHandler(button));
             }
         });
     }

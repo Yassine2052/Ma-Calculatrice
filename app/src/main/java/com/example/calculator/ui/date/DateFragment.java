@@ -102,12 +102,7 @@ public class DateFragment extends Fragment {
         ));
 
         buttons.forEach(button -> {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ButtonClickHandler(view);
-                }
-            });
+            button.setOnClickListener(view -> ButtonClickHandler(view));
         });
     }
 
@@ -127,12 +122,9 @@ public class DateFragment extends Fragment {
                     calendar.get(Calendar.DAY_OF_MONTH)
             );
 
-            datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                    DatePickerHandler(viewId == R.id.from_date_pick_button ? PickedDate.FROM_DATE : PickedDate.TO_DATE, y, m, d);
-                }
-            });
+            datePickerDialog.setOnDateSetListener(
+                    (DatePicker datePicker, int y, int m, int d) ->
+                            DatePickerHandler(viewId == R.id.from_date_pick_button ? PickedDate.FROM_DATE : PickedDate.TO_DATE, y, m, d));
 
             datePickerDialog.show();
         }

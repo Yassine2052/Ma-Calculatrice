@@ -517,6 +517,14 @@ public class CalculatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if(savedInstanceState != null){
+            number1 = savedInstanceState.getString("number1");
+            number2 = savedInstanceState.getString("number2");
+            result = savedInstanceState.getString("result");
+            operator = savedInstanceState.getString("operator");
+            historyShown = savedInstanceState.getBoolean("historyShown");
+        }
+
         containerClickListener();
         historyButtonListener();
         numbersButtonsListeners();
@@ -529,5 +537,18 @@ public class CalculatorFragment extends Fragment {
         initHistory();
 
         toggleHistory();
+
+        calculateResult();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("number1", number1);
+        outState.putString("number2", number2);
+        outState.putString("operator", operator);
+        outState.putString("result", result);
+        outState.putBoolean("historyShown", historyShown);
     }
 }

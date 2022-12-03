@@ -351,6 +351,16 @@ public class LengthFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if(savedInstanceState != null){
+            selectedItemFrom = savedInstanceState.getString("from");
+
+            selectedItemTo = savedInstanceState.getString("to");
+
+            fromValue = savedInstanceState.getString("fromValue");
+
+            toValue = savedInstanceState.getString("toValue");
+        }
+
         numbersButtonsListeners();
         eraseButtonClickListener();
         clearButtonClickListener();
@@ -360,5 +370,18 @@ public class LengthFragment extends Fragment {
         Spinner spinnerTo = (Spinner) getView().findViewById(R.id.length_to);
 
         SpinnerAdapterSetter(spinnerFrom, spinnerTo);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("from", selectedItemFrom);
+
+        outState.putString("to", selectedItemTo);
+
+        outState.putString("fromValue", fromValue);
+
+        outState.putString("toValue", toValue);
     }
 }

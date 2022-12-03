@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.calculator.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -161,7 +162,27 @@ public class DateFragment extends Fragment {
 
         FromDatePickerListener();
 
+        if(savedInstanceState != null){
+            try{
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+                fromDate = formatter.parse(savedInstanceState.getString("from"));
+                toDate = formatter.parse(savedInstanceState.getString("to"));
+
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
+
         DisplayDates();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("from", fromDate.toString());
+
+        outState.putString("to", toDate.toString());
+    }
 }
